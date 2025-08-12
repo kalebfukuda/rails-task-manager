@@ -1,0 +1,25 @@
+  <div class="d-flex flex-column text-center w-100">
+    <h1>My Tasks</h1>
+    <ul class="list-group">
+    <% @tasks.each do |task| %>
+      <li class="list-group-item">
+        <div class="d-flex align-items-center justify-content-between">
+          <div>
+            <% if task.completed %>
+              <i class="fa-solid fa-square-check"></i>
+            <% else %>
+              <i class="fa-solid fa-square"></i>
+            <% end %>
+
+            <%= link_to task.title, task_path(task), class: "text-decoration-none text-black"  %>
+          </div>
+          <%= link_to task_path(task),
+            data: { turbo_method: :delete, turbo_confirm: "Delete #{task.title}?"} do %>
+            <i class="fa-solid fa-x text-black"></i>
+          <% end %>
+        </div>
+      </li>
+    <% end %>
+    </ul>
+    <%= link_to 'add new task', new_task_path, class: "btn btn-primary mt-2"  %>
+  </div>
